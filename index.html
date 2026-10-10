@@ -1,154 +1,193 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Welcome to our website. Learn more about us and get in touch.">
-  <title>My Website</title>
-
+  <meta name="description" content="Discover Text to Image AI and learn how artificial intelligence transforms written prompts into visual art.">
+  <meta name="theme-color" content="#101026">
+  <title>Text to Image AI | staticai.space</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --bg: #0b0b18;
+      --panel: #15152a;
+      --text: #f5f5ff;
+      --muted: #b8b8d0;
+      --accent: #a78bfa;
+      --accent2: #67e8f9;
+      --line: rgba(255,255,255,.12);
     }
-
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: Arial, sans-serif;
-      color: #1f2937;
-      background: #f8fafc;
-      line-height: 1.6;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(ellipse at top right, #24204b 0, var(--bg) 48%);
+      color: var(--text);
+      line-height: 1.65;
     }
-
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1100px, calc(100% - 40px)); margin: auto; }
     header {
-      background: #ffffff;
-      padding: 20px 8%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 8px #0000000d;
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(11,11,24,.82); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
     }
-
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: #2563eb;
+    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { font-weight: 800; font-size: 1.2rem; letter-spacing: -.04em; }
+    .brand span { color: var(--accent2); }
+    nav { display: flex; flex-wrap: wrap; gap: 22px; color: var(--muted); font-size: .95rem; }
+    nav a:hover { color: white; }
+    .hero { padding: 100px 0 82px; text-align: center; }
+    .eyebrow {
+      display: inline-block; padding: 6px 13px; border: 1px solid var(--line);
+      border-radius: 999px; color: var(--accent2); background: rgba(103,232,249,.06);
+      font-size: .85rem; font-weight: 650;
     }
-
-    nav a {
-      margin-left: 20px;
-      text-decoration: none;
-      color: #374151;
+    h1 { font-size: clamp(2.5rem, 7vw, 5rem); line-height: 1.06; letter-spacing: -.06em; margin: 24px auto 20px; max-width: 900px; }
+    h1 span { background: linear-gradient(100deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p { color: var(--muted); font-size: 1.15rem; max-width: 700px; margin: 0 auto 30px; }
+    .button { display: inline-block; padding: 12px 20px; border-radius: 12px; background: linear-gradient(100deg, #8b5cf6, #0891b2); font-weight: 750; }
+    .button:hover { filter: brightness(1.12); }
+    .visual {
+      max-width: 850px; margin: 58px auto 0; padding: 12px; border: 1px solid var(--line);
+      border-radius: 24px; background: rgba(255,255,255,.04); box-shadow: 0 25px 80px rgba(0,0,0,.3);
     }
-
-    .hero {
-      min-height: 75vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 40px 20px;
-      background: linear-gradient(135deg, #dbeafe, #eff6ff);
+    .art-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .art {
+      min-height: 170px; border-radius: 16px; display: flex; align-items: end; padding: 15px;
+      overflow: hidden; position: relative; isolation: isolate; font-weight: 700;
     }
-
-    .hero h1 {
-      font-size: clamp(36px, 6vw, 58px);
-      margin-bottom: 16px;
-      color: #1e3a8a;
+    .art::before { content: ""; position: absolute; inset: 0; z-index: -1; }
+    .art:nth-child(1)::before { background: radial-gradient(circle at 30% 25%, #f9a8d4, transparent 30%), linear-gradient(140deg, #4338ca, #111827 70%); }
+    .art:nth-child(2)::before { background: radial-gradient(circle at 65% 25%, #fde68a, transparent 25%), linear-gradient(145deg, #0e7490, #164e63 45%, #172554); }
+    .art:nth-child(3)::before { background: radial-gradient(circle at 50% 30%, #c4b5fd, transparent 26%), linear-gradient(145deg, #7c3aed, #312e81 50%, #111827); }
+    section { padding: 72px 0; }
+    .section-heading { text-align: center; max-width: 720px; margin: 0 auto 36px; }
+    h2 { font-size: clamp(1.8rem, 4vw, 2.7rem); letter-spacing: -.04em; line-height: 1.2; margin: 0 0 14px; }
+    .section-heading p, .muted { color: var(--muted); }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { padding: 24px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,.035); }
+    .icon { font-size: 1.7rem; }
+    .card h3 { margin: 10px 0 8px; font-size: 1.12rem; }
+    .card p { color: var(--muted); margin: 0; }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: step; }
+    .step { border-top: 2px solid var(--accent); padding: 20px 16px 0 0; }
+    .step-number { color: var(--accent2); font-size: .85rem; font-weight: 800; letter-spacing: .1em; }
+    .step h3 { margin: 8px 0; }
+    .step p { color: var(--muted); font-size: .95rem; margin: 0; }
+    .callout { border: 1px solid var(--line); border-radius: 22px; padding: 32px; background: linear-gradient(120deg, rgba(139,92,246,.14), rgba(8,145,178,.1)); }
+    .callout p { color: var(--muted); margin-bottom: 0; }
+    footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted); font-size: .9rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    @media (max-width: 760px) {
+      .nav { padding: 14px 0; align-items: flex-start; flex-direction: column; gap: 10px; }
+      nav { gap: 14px; }
+      .hero { padding: 72px 0 55px; }
+      .art-grid, .cards { grid-template-columns: 1fr; }
+      .art { min-height: 150px; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      section { padding: 54px 0; }
     }
-
-    .hero p {
-      max-width: 600px;
-      font-size: 18px;
-      color: #4b5563;
-      margin-bottom: 28px;
-    }
-
-    .button {
-      display: inline-block;
-      background: #2563eb;
-      color: white;
-      padding: 13px 26px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .button:hover {
-      background: #1d4ed8;
-    }
-
-    .about {
-      padding: 60px 20px;
-      text-align: center;
-    }
-
-    .about h2 {
-      font-size: 30px;
-      margin-bottom: 16px;
-    }
-
-    .about p {
-      max-width: 650px;
-      margin: auto;
-      color: #6b7280;
-    }
-
-    footer {
-      background: #111827;
-      color: #ffffff;
-      text-align: center;
-      padding: 22px;
-    }
-
-    @media (max-width: 480px) {
-      header {
-        padding: 18px 5%;
-      }
-
-      nav a {
-        margin-left: 10px;
-        font-size: 14px;
-      }
+    @media (max-width: 430px) {
+      .container { width: min(100% - 28px, 1100px); }
+      .steps { grid-template-columns: 1fr; }
+      .callout { padding: 23px; }
     }
   </style>
 </head>
-
 <body>
   <header>
-    <div class="logo">MyWebsite</div>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="container nav">
+      <a class="brand" href="#home">staticai<span>.space</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
   <main>
     <section class="hero" id="home">
-      <h1>Welcome to My Website</h1>
-      <p>
-        A simple, modern website to showcase your brand,
-        share your ideas, and connect with your audience.
-      </p>
-      <a href="#contact" class="button">Contact Us</a>
+      <div class="container">
+        <span class="eyebrow">Explore the world of generative AI</span>
+        <h1>Turn words into <span>visual wonder.</span></h1>
+        <p>Discover Text to Image AI — a creative technology that transforms written descriptions into imaginative visual concepts.</p>
+        <a class="button" href="#about">Discover how it works</a>
+        <div class="visual" aria-label="Illustrative examples of digital art styles">
+          <div class="art-grid">
+            <div class="art">Dreamlike worlds</div>
+            <div class="art">Nature &amp; fantasy</div>
+            <div class="art">Digital imagination</div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="about" id="about">
-      <h2>About Us</h2>
-      <p>
-        We are passionate about creating great experiences.
-        This is your space to introduce your business,
-        services, or personal brand.
-      </p>
+    <section id="about">
+      <div class="container">
+        <div class="section-heading">
+          <h2>What is Text to Image AI?</h2>
+          <p>Text to Image AI uses machine-learning models trained on image and text data to create visual content from written prompts. A prompt describes the subject, setting, mood, and style you want to explore.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Creative possibilities</h2>
+          <p>Explore some of the ways text-to-image technology can support visual thinking and creative work.</p>
+        </div>
+        <div class="cards">
+          <article class="card"><div class="icon" aria-hidden="true">🎨</div><h3>Different art styles</h3><p>Explore concepts inspired by illustration, digital art, cartoons, and realistic imagery.</p></article>
+          <article class="card"><div class="icon" aria-hidden="true">💡</div><h3>Ideas into visuals</h3><p>Use descriptive prompts to communicate a scene, character, product concept, or imaginary world.</p></article>
+          <article class="card"><div class="icon" aria-hidden="true">✨</div><h3>Creative inspiration</h3><p>Discover new directions for storytelling, design brainstorming, learning materials, and personal projects.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works">
+      <div class="container">
+        <div class="section-heading">
+          <h2>How does it work?</h2>
+          <p>Most text-to-image tools follow a simple process.</p>
+        </div>
+        <div class="steps">
+          <article class="step"><div class="step-number">STEP 01</div><h3>Write a prompt</h3><p>Describe the image, subject, setting, lighting, and style.</p></article>
+          <article class="step"><div class="step-number">STEP 02</div><h3>AI interprets it</h3><p>The model processes the relationship between words and visual patterns.</p></article>
+          <article class="step"><div class="step-number">STEP 03</div><h3>Create an image</h3><p>The tool generates a visual result based on the prompt.</p></article>
+          <article class="step"><div class="step-number">STEP 04</div><h3>Refine the idea</h3><p>Adjust the description and try again to explore other results.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="uses">
+      <div class="container">
+        <div class="callout">
+          <h2>Where can it be useful?</h2>
+          <p>Text-to-image AI can support concept art, social media visuals, advertising ideas, educational illustrations, storytelling, and early-stage design exploration. Always review usage rights and verify important details before publishing generated content.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Get in touch</h2>
+          <p>Have a question or suggestion about this website? We would be happy to hear from you.</p>
+          <a class="button" href="mailto:contact@staticai.space">contact@staticai.space</a>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer id="contact">
-    <p>Contact: hello@example.com</p>
-    <p>&copy; 2026 MyWebsite. All rights reserved.</p>
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2026 staticai.space</span>
+      <span>Exploring creativity and artificial intelligence.</span>
+    </div>
   </footer>
 </body>
 </html>
